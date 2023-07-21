@@ -1,26 +1,25 @@
 public class MonthData {
-    int[] days = new int[30];
+    static final int daysInMonth = 30;
+    int[] days = new int[daysInMonth];
 
     void printDaysAndStepsFromMonth() {
-        for (int i = 0; i < days.length; i++) {
-            System.out.println((i + 1) + " день: " + days[i]);
+        for (int day = 0; day < days.length; day++) {
+            System.out.println((day + 1) + " день: " + days[day]);
         }
     }
 
     int sumStepsFromMonth() {
         int sumSteps = 0;
-        for (int i = 0; i < days.length; i++) {
-            sumSteps += days[i];
+        for (int day = 0; day < days.length; day++) {
+            sumSteps += days[day];
         }
         return sumSteps;
     }
 
     int maxSteps() {
          int maxSteps = days[0];
-         for (int i = 1; i < days.length; i++) {
-             if (days[i] > maxSteps) {
-                 maxSteps = days[i];
-             }
+         for (int day = 1; day < days.length; day++) {
+             maxSteps = defineLargerNumber(maxSteps, days[day]);
          }
          return maxSteps;
     }
@@ -28,16 +27,22 @@ public class MonthData {
     int bestSeries(int goalByStepsPerDay) {
         int bestSeries = 0;
         int seriesLength = 0;
-        for (int i = 0; i < days.length; i++) {
-            if (days[i] >= goalByStepsPerDay) {
+        for (int day = 0; day < days.length; day++) {
+            if (days[day] >= goalByStepsPerDay) {
                 seriesLength++;
+                if (day == 29)
+                    bestSeries = defineLargerNumber(seriesLength, bestSeries);
             } else {
-                if (seriesLength > bestSeries) {
-                    bestSeries = seriesLength;
-                }
+                bestSeries = defineLargerNumber(seriesLength, bestSeries);
                 seriesLength = 0;
             }
         }
         return bestSeries;
+    }
+
+    int defineLargerNumber(int num1, int num2) {
+        if (num1 >= num2)
+            return num1;
+        return num2;
     }
 }

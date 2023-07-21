@@ -9,26 +9,25 @@ public class Main {
             printMenu();
 
             int command = scanner.nextInt();
-            if (command == 1) {
-                stepTracker.addNewNumbersStepsPerDay();
-            } else if (command == 2) {
-                stepTracker.changeStepGoal();
-            } else if (command == 3) {
-                stepTracker.printStatistic();
-            } else if (command == 0) {
-                System.out.println("Работа завершена.");
-                break;
-            } else {
-                System.out.println("Такой команды нет.");
+            switch (command) {
+                case 1: stepTracker.addNewNumbersStepsPerDay();
+                        break;
+                case 2: stepTracker.changeStepGoal();
+                        break;
+                case 3: stepTracker.printStatistic();
+                        break;
+                case 0: System.out.println("Работа завершена.");
+                        return;
+                default:System.out.println("Такой команды нет.");
+                        break;
+
             }
         }
     }
 
     static void printMenu() {
-        System.out.println("Введите номер необходимой комманды:");
-        System.out.println("1.Ввести количество шагов за определённый день");
-        System.out.println("2.Изменить цель по количеству шагов за день");
-        System.out.println("3.Напечатать статистику за определнный месяц");
-        System.out.println("0.Выйти из приложения");
+        System.out.println("Введите номер необходимой комманды:\n1.Ввести количество шагов за определённый день\n" +
+                "2.Изменить цель по количеству шагов за день\n3.Напечатать статистику за определнный месяц\n" +
+                "0.Выйти из приложения");
     }
 }
